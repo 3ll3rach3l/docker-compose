@@ -1,0 +1,18 @@
+version: "3"
+
+services: 
+    drupal:
+        build: .
+        image: lbeard/custom-drupal
+        ports: 
+            - "9000:80"
+        depends_on: 
+            - "postgres"
+    postgres:
+        image: postgres:9.6
+        environment: 
+            - POSTGRES_PASSWORD=password
+        volumes: 
+            - drupal-data:/var/lib/postgresql/data
+volumes:
+    drupal-data:
